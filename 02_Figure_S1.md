@@ -52,7 +52,7 @@ RefSeq_NLRtracker <- RefSeq_NLRtracker %>%
 ```
 
 Prepare the functions and prerequisites:
-```{r}
+```r
 # Function to remove duplicates based on "sequence" column
 remove_duplicates_by_sequence <- function(df) {
   # Filter out rows with duplicate "sequence" values
@@ -64,6 +64,51 @@ domains <- c("CNL","CNLO","CN","OCNL","CONL","CNNL","CNLOLO",
              "BCNL","BNL","BCN","BCCNL","BNLO","BOCNL",
              "RNL",
              "TN","TNL","TNLO","TNLJ")
+
+```
+
+
+Process the data:
+```{r}
+# extract the full-length NLRs
+RefSeq_NLR <- filter(RefSeq_NLRtracker, RefSeq_NLRtracker$type == "CHAIN" & RefSeq_NLRtracker$Status == "NLR")
+
+# only keep the desired domain architectures and deduplicate NLRs
+RefSeq_NLR_filtered <- RefSeq_NLR[RefSeq_NLR$Simple %in% domains,]
+
+RefSeq_NLR_filtered_deduplicated <- remove_duplicates_by_sequence(RefSeq_NLR_filtered)
+
+
+
+# extract the NBARC domains
+RefSeq_NBARC <- RefSeq_NLRtracker[RefSeq_NLRtracker$description == "NBARC",]
+
+RefSeq_NBARC_filtered_deduplicated <- RefSeq_NBARC[RefSeq_NBARC$ID %in% RefSeq_NLR_filtered_deduplicated$ID,]
+
+
+# filter out NLRs with truncated NBARC domain
+
+RefSeq_NBARC_filtered_deduplicated_len <- filter(RefSeq_NBARC_filtered_deduplicated, 
+                                                              RefSeq_NBARC_filtered_deduplicated$end - RefSeq_NBARC_filtered_deduplicated$start > 150 &
+                                                              RefSeq_NBARC_filtered_deduplicated$end - RefSeq_NBARC_filtered_deduplicated$start < 500)
+
+
+RefSeq_NLR_filtered_deduplicated_len <- RefSeq_NLR_filtered_deduplicated[RefSeq_NLR_filtered_deduplicated$seqname %in% RefSeq_NBARC_filtered_deduplicated_len$seqname,]
+
+# convert the final data to biostring objects
+
+RefSeq_NLR_filtered_deduplicated_len_seq <- AAStringSet(RefSeq_NLR_filtered_deduplicated_len$sequence)
+RefSeq_NLR_filtered_deduplicated_len_seq@ranges@NAMES <- RefSeq_NLR_filtered_deduplicated_len$ID
+
+
+## add a suffix to NLRs with two NBARCs
+RefSeq_NBARC_filtered_deduplicated_len <- RefSeq_NBARC_filtered_deduplicated_len %>%
+  group_by(ID) %>%
+  mutate(`deduplicated ID` = paste0(ID, ifelse(row_number() == 1, "", paste0("_", row_number())))) %>%
+  ungroup()
+
+RefSeq_NBARC_filtered_deduplicated_len_seq <- AAStringSet(RefSeq_NBARC_filtered_deduplicated_len$sequence)
+RefSeq_NBARC_filtered_deduplicated_len_seq@ranges@NAMES <- RefSeq_NBARC_filtered_deduplicated_len$`deduplicated ID`
 
 ```
 
