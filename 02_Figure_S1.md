@@ -1,5 +1,6 @@
 ### Data preparation and processing:
 
+![R](https://img.shields.io/badge/r-4.3.3-blue.svg)
 ##### Load required libraries:
 ```r
 library(tidyverse)
