@@ -1,7 +1,7 @@
 
 ##### Script to generate the phylogenetic tree:
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH -c 16
