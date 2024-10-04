@@ -69,7 +69,7 @@ domains <- c("CNL","CNLO","CN","OCNL","CONL","CNNL","CNLOLO",
 
 
 Process the data:
-```{r}
+```r
 # extract the full-length NLRs
 RefSeq_NLR <- filter(RefSeq_NLRtracker, RefSeq_NLRtracker$type == "CHAIN" & RefSeq_NLRtracker$Status == "NLR")
 
@@ -112,7 +112,25 @@ RefSeq_NBARC_filtered_deduplicated_len_seq@ranges@NAMES <- RefSeq_NBARC_filtered
 
 ```
 
+Import RefPlantNLR and references, and add them to the datasets and export:
+```r
+RefPlantNLR <- readAAStringSet("/path/to/data/references/RefPlantNLR.fasta")
+RefPlantNLR_NBARC <- readAAStringSet("/path/to/data/references/RefPlantNLR_NBARC.fasta")
 
+reference_pairs <- readAAStringSet("/path/to/data/references/nlrtracker_characterized_paired_NLRs_NLR.fasta")
+reference_pairs_NBARC <- readAAStringSet("/path/to/data/references/nlrtracker_characterized_paired_NLRs_NBARC.fasta")
+
+new_refs <- reference_pairs[!reference_pairs@ranges@NAMES %in% RefPlantNLR_NBARC@ranges@NAMES]
+new_refs_NBARC <- reference_pairs_NBARC[!reference_pairs_NBARC@ranges@NAMES %in% RefPlantNLR_NBARC@ranges@NAMES]
+
+all_ref <- c(RefSeq_NLR_filtered_deduplicated_len_seq, RefPlantNLR, new_refs)
+all_ref_NBARC <- c(RefSeq_NBARC_filtered_deduplicated_len_seq, RefPlantNLR_NBARC, new_refs_NBARC)
+
+writeXStringSet(all_ref_NBARC,"/path/to/all_ref_nbarc.fasta") # This will be used for alignment and generating the phylogenetic tree
+writeXStringSet(all_ref,"/path/to/all_ref.fasta")
+```
+
+-------------
 
 ### Script to generate the phylogenetic tree:
 
