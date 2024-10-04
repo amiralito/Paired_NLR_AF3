@@ -133,7 +133,7 @@ writeXStringSet(all_ref,"/path/to/all_ref.fasta")
 -------------
 
 ### Script to generate the phylogenetic tree:
-
+![bash](https://img.shields.io/badge/bash-black.svg)
 ```bash
 #!/bin/bash
 
