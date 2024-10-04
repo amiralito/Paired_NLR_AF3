@@ -15,7 +15,7 @@ Software                            | Source
 ------------------------------------| ------------------------------------
 *FAMSA v2.2.2*                      | (https://github.com/GSLBiotech/mafft)
 *FastTree v2.1.10*                  | (http://www.microbesonline.org/fasttree/)
-*R v4.3.1*                          | (https://cran.r-project.org/)
+*R v4.3.3*                          | (https://cran.r-project.org/)
 *NLRtracker*                        | (https://github.com/slt666666/NLRtracker)
 
 
