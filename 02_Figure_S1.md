@@ -51,6 +51,23 @@ RefSeq_NLRtracker <- RefSeq_NLRtracker %>%
 
 ```
 
+Prepare the functions and prerequisites:
+```{r}
+# Function to remove duplicates based on "sequence" column
+remove_duplicates_by_sequence <- function(df) {
+  # Filter out rows with duplicate "sequence" values
+  df %>% distinct(sequence, .keep_all = TRUE)
+}
+
+domains <- c("CNL","CNLO","CN","OCNL","CONL","CNNL","CNLOLO",
+             "NL","NLO","ONL",
+             "BCNL","BNL","BCN","BCCNL","BNLO","BOCNL",
+             "RNL",
+             "TN","TNL","TNLO","TNLJ")
+
+```
+
+
 
 ### Script to generate the phylogenetic tree:
 
