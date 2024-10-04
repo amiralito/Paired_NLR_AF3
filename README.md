@@ -31,3 +31,4 @@ BiocManager::install("ggtree")
 
 
 * [Part one - Materials and Methods](/01_materials_and_methods)
+* [Part two - Scripts for Figure S1](/02_Figure_S1)
