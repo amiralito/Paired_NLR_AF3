@@ -13,7 +13,7 @@ DOI:
 Resources:
 Software                            | Source
 ------------------------------------| ------------------------------------
-*FAMSA v2.2.2*                      | ([https://github.com/GSLBiotech/mafft](https://github.com/refresh-bio/FAMSA))
+*FAMSA v2.2.2*                      | ([https://github.com/refresh-bio/FAMSA](https://github.com/refresh-bio/FAMSA))
 *FastTree v2.1.10*                  | ([http://www.microbesonline.org/fasttree/](http://www.microbesonline.org/fasttree/))
 *R v4.3.3*                          | ([https://cran.r-project.org/](https://cran.r-project.org/))
 *NLRtracker*                        | ([https://github.com/slt666666/NLRtracker](https://github.com/slt666666/NLRtracker))
