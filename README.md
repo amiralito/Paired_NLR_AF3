@@ -1,5 +1,7 @@
 # Phylogenetic analysis of paired NLRs in rice.
 
+[![DOI](https://img.shields.io/badge/bioRxiv-doi.org/10.1101/2024.11.24.625045-BE2634.svg)](https://doi.org/10.1101/2024.11.24.625045)
+
 # Supporting scripts and material for "Can AI predictions of protein structures distinguish between sensor and helper NLR immune receptors?"
 
 AmirAli Toghani, Ryohei Terauchi, Sophien Kamoun, Yu Sugihara
