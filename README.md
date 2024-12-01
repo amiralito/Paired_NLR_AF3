@@ -4,7 +4,7 @@
 
 # Supporting scripts and material for "Can AI predictions of protein structures distinguish between sensor and helper NLR immune receptors?"
 
-AmirAli Toghani, Ryohei Terauchi, Sophien Kamoun, Yu Sugihara
+AmirAli Toghani, Raoul Frijters, Tolga O. Bozkurt, Ryohei Terauchi, Sophien Kamoun, Yu Sugihara
 
 
 Resources:
